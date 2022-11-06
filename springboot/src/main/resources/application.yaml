@@ -5,23 +5,29 @@ spring:
   datasource:
     dynamic:
       # 设置默认的数据源
-      primary: slave
+      primary: master
       # 严格匹配数据源，默认false
       strict: false
       datasource:
         # 主数据源
         master:
-          url: jdbc:postgresql://119.3.168.172:26000/postgres
+          url: jdbc:postgresql://123.249.23.220:26000/postgres
           driver-class-name: org.postgresql.Driver
-          username: jim
+          username: student
           password: Bigdata@123
 
         #  从数据源
-        slave:
-          url: jdbc:postgresql://119.3.168.172:26000/postgres
+        slave_1:
+          url: jdbc:postgresql://123.249.23.220:26000/postgres
           driver-class-name: org.postgresql.Driver
-          username: joe
-          password: qazWSX123
+          username: teacher
+          password: Bigdata@123
+
+        slave_2:
+          url: jdbc:postgresql://123.249.23.220:26000/postgres
+          driver-class-name: org.postgresql.Driver
+          username: admin
+          password: Bigdata@123
 
     druid:
       initial-size: 5     #初始化大小

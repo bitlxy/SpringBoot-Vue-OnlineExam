@@ -42,9 +42,11 @@ public interface StudentMapper {
      * @return 受影响的记录条数
      */
 
-    @Update("update student set studentName = #{studentName},grade = #{grade},image = #{image},major = #{major},clazz = #{clazz}," +
-            "institute = #{institute},tel = #{tel},email = #{email},pwd = #{pwd},cardId = #{cardId},sex = #{sex},role = #{role} " +
-            "where studentId = #{studentId}")
+    @Update("{call prd_insert_update_student(#{studentId,mode=IN,jdbcType=INTEGER}, #{studentName,mode=IN,jdbcType=VARCHAR},#{image, mode=IN, jdbcType=VARCHAR},#{grade,mode=IN,jdbcType=VARCHAR}," +
+            "#{major,mode=IN,jdbcType=VARCHAR}, #{clazz,mode=IN,jdbcType=VARCHAR}, #{institute,mode=IN,jdbcType=VARCHAR}, #{tel,mode=IN,jdbcType=VARCHAR}," +
+            "#{email,mode=IN,jdbcType=VARCHAR}, #{pwd,mode=IN,jdbcType=VARCHAR}, #{cardId,mode=IN,jdbcType=VARCHAR},#{sex,mode=IN,jdbcType=VARCHAR}," +
+            "#{role,mode=IN,jdbcType=VARCHAR},#{teacherId,mode=IN,jdbcType=INTEGER})}")
+    @Options(statementType = StatementType.CALLABLE)
     int update(Student student);
 
     /**
@@ -60,7 +62,7 @@ public interface StudentMapper {
     //@Insert("insert into student(studentName,grade,major,clazz,institute,tel,email,pwd,cardId,sex,role) values " +
     //       "(#{studentName},#{grade},#{major},#{clazz},#{institute},#{tel},#{email},#{pwd},#{cardId},#{sex},#{role})")
     @Options(useGeneratedKeys = true, keyProperty = "studentId", statementType = StatementType.CALLABLE)
-    @Insert("{call prd_insert_update_student(#{studentId,mode=IN,jdbcType=INTEGER}, #{studentName,mode=IN,jdbcType=VARCHAR},#{grade,mode=IN,jdbcType=VARCHAR}," +
+    @Insert("{call prd_insert_update_student(#{studentId,mode=IN,jdbcType=INTEGER}, #{studentName,mode=IN,jdbcType=VARCHAR},#{image, mode=IN, jdbcType=VARCHAR\"#{grade,mode=IN,jdbcType=VARCHAR}," +
             "#{major,mode=IN,jdbcType=VARCHAR}, #{clazz,mode=IN,jdbcType=VARCHAR}, #{institute,mode=IN,jdbcType=VARCHAR}, #{tel,mode=IN,jdbcType=VARCHAR}," +
             "#{email,mode=IN,jdbcType=VARCHAR}, #{pwd,mode=IN,jdbcType=VARCHAR}, #{cardId,mode=IN,jdbcType=VARCHAR},#{sex,mode=IN,jdbcType=VARCHAR}," +
             "#{role,mode=IN,jdbcType=VARCHAR}, #{teacherId,mode=IN,jdbcType=INTEGER})}")

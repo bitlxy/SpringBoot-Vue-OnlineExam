@@ -23,11 +23,11 @@ public class Student {
     @ExcelProperty("姓名")
     private String studentName;
 
-    @ColumnWidth(20)
-    @ExcelProperty("年级")
-
+    @ExcelIgnore
     private String image;
 
+    @ColumnWidth(20)
+    @ExcelProperty("年级")
     private String grade;
 
     @ColumnWidth(20)

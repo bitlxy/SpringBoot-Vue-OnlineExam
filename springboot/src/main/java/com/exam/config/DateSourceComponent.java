@@ -3,7 +3,6 @@ package com.exam.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
@@ -21,7 +20,10 @@ public class DateSourceComponent {
     private MasterDataSourceConfig masterDataSourceConfig;
 
     @Resource
-    private SlaveDataSourceConfig slaveDataSourceConfig;
+    private Slave1DataSourceConfig slave1DataSourceConfig;
+
+    @Resource
+    private Slave2DataSourceConfig slave2DataSourceConfig;
 
     @Bean(name = "master")
     public DataSource masterDataSource() {
@@ -33,13 +35,23 @@ public class DateSourceComponent {
         return dataSource;
     }
 
-    @Bean(name = "slave")
-    public DataSource slaveDataSource() {
+    @Bean(name = "slave_1")
+    public DataSource slave1DataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(slaveDataSourceConfig.getUrl());
-        dataSource.setUsername(slaveDataSourceConfig.getUsername());
-        dataSource.setPassword(slaveDataSourceConfig.getPassword());
-        dataSource.setDriverClassName(slaveDataSourceConfig.getDriverClassName());
+        dataSource.setUrl(slave1DataSourceConfig.getUrl());
+        dataSource.setUsername(slave1DataSourceConfig.getUsername());
+        dataSource.setPassword(slave1DataSourceConfig.getPassword());
+        dataSource.setDriverClassName(slave1DataSourceConfig.getDriverClassName());
+        return dataSource;
+    }
+
+    @Bean(name = "slave_2")
+    public DataSource slave2DataSource() {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl(slave2DataSourceConfig.getUrl());
+        dataSource.setUsername(slave2DataSourceConfig.getUsername());
+        dataSource.setPassword(slave2DataSourceConfig.getPassword());
+        dataSource.setDriverClassName(slave2DataSourceConfig.getDriverClassName());
         return dataSource;
     }
 
@@ -49,8 +61,12 @@ public class DateSourceComponent {
 
 
     @Autowired
-    @Qualifier("slave")
-    private DataSource slaveDateSource;
+    @Qualifier("slave_1")
+    private DataSource slave1DataSource;
+
+    @Autowired
+    @Qualifier("slave_2")
+    private DataSource slava2DataSource;
 
 
     @Primary
@@ -60,9 +76,10 @@ public class DateSourceComponent {
         MultiRouteDataSource multiRouteDataSource = new MultiRouteDataSource();
         Map<Object, Object> targetDateSource = new HashMap<>();
         targetDateSource.put("master", masterDateSource);
-        targetDateSource.put("slave", slaveDateSource);
+        targetDateSource.put("slave_1", slave1DataSource);
+        targetDateSource.put("slave_2", slava2DataSource);
         multiRouteDataSource.setTargetDataSources(targetDateSource);
-        multiRouteDataSource.setDefaultTargetDataSource(slaveDateSource);
+        multiRouteDataSource.setDefaultTargetDataSource(masterDateSource);
         return multiRouteDataSource;
     }
 
