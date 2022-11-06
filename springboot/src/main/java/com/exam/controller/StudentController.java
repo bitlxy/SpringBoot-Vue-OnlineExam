@@ -71,7 +71,7 @@ public class StudentController {
 
     // ok?
     @PostMapping("/student")
-    public ApiResult add(Student student) {
+    public ApiResult add(@RequestBody Student student) {
         int res = studentService.add(student);
         if (res == 1) {
             return ApiResultHandler.buildApiResult(200, "添加成功", null);

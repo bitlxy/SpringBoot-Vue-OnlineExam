@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     onSubmit() { //数据提交
+      console.log(this.form)
       this.$axios({
         url: '/api/student',
         method: 'post',
