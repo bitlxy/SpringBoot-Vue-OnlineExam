@@ -593,6 +593,7 @@ CREATE TABLE student
     pwd         VARCHAR(100)        NULL DEFAULT NULL,
     cardId      VARCHAR(18)        NULL DEFAULT NULL,
     sex         VARCHAR(3)         NULL DEFAULT NULL,
+    teacherId   INTEGER            NULL DEFAULT NULL,
     role        VARCHAR(1)         NULL DEFAULT '2'
 );
 -- ----------------------------
@@ -600,19 +601,19 @@ CREATE TABLE student
 -- ----------------------------
 INSERT INTO student
 VALUES (20154001, '隔壁老王', '','2015', '计算机科学与技术', '2', '软件工程学院', '13585439532', 'gblw@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
-        '3412312', '男', '2');
+        '3412312', '男', 20081001, '2');
 INSERT INTO student
 VALUES (20154084, '大咸鱼', '','2015', '计算机科学与技术', '2', '软件工程学院', '13658377857', '13658377857@sina.cn',
-        'E10ADC3949BA59ABBE56E057F20F883E', '124123124535', '男', '2');
+        'E10ADC3949BA59ABBE56E057F20F883E', '124123124535', '男', 20081001,'2');
 INSERT INTO student
 VALUES (20155003, '张大宝', '','2015', '信息工程', '1', '软件工程学院', '15583829425', '15583829425@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
-        '3242342', '男', '2');
+        '3242342', '男', 20081001,'2');
 INSERT INTO student
 VALUES (20155007, '翠花', '','2015', '网络工程', '1', '软件工程学院', '18734538457', '18734538457@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
-        '2423423', '女', '2');
+        '2423423', '女', 20081001,'2');
 INSERT INTO student
 VALUES (20155008, '小王', '','2015', '信息工程', '2', '软件工程学院', '15523619564', '15523619564@163.com', 'E10ADC3949BA59ABBE56E057F20F883E',
-        '500234199704022353', '男', '2');
+        '500234199704022353', '男', 20081001,'2');
 
 -- ----------------------------
 -- Table structure for teacher

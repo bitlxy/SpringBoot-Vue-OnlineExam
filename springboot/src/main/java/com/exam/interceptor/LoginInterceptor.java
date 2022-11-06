@@ -35,12 +35,17 @@ public class LoginInterceptor implements HandlerInterceptor {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("role")) {
                         switch (cookie.getValue()){
+                            // 管理员数据源
                             case "0" :
-                                DataSourceContext.setDateSource("master");
+                                DataSourceContext.setDateSource("slave_2");
                                 break;
+                            // 教师数据源
                             case "1":
+                                DataSourceContext.setDateSource("slave_1");
+                                break;
+                            // 学生数据源
                             case "2":
-                                DataSourceContext.setDateSource("slave");
+                                DataSourceContext.setDateSource("master");
                                 break;
                         }
                     }

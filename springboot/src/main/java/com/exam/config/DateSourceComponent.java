@@ -70,7 +70,7 @@ public class DateSourceComponent {
 
 
     @Primary
-    @DependsOn({"master", "slave"}) // 解决数据库循环和依赖的问题
+    @DependsOn({"master", "slave_1", "slave_2"}) // 解决数据库循环和依赖的问题
     @Bean(name = "multiDataSource")
     public MultiRouteDataSource exampleRouteDateSource() {
         MultiRouteDataSource multiRouteDataSource = new MultiRouteDataSource();
