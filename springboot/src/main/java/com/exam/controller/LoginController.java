@@ -24,7 +24,6 @@ public class LoginController {
 
         Integer username = login.getUsername();
         String password = login.getPassword();
-        // return ApiResultHandler.buildApiResult(200, "登录成功", new Admin(9527, "admin", "男", "123456789", "", "123456", "123456789", "0"));
         password = MD5.encrypt(password);
         Admin adminRes = loginService.adminLogin(username, password);
         if (adminRes != null) {

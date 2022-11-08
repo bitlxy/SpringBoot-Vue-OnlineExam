@@ -24,7 +24,7 @@
     <div class="main">
       <router-view></router-view>
     </div>
-    <v-footer></v-footer>
+<!--    <v-footer></v-footer>-->
   </div>
 </template>
 
